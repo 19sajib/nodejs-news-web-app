@@ -7,23 +7,54 @@ const axios = require('axios');
 newsRouter.get('', async (req, res) => {
 
     try {
-        const newAPI = await axios.get(`https://newsapi.org/v2/everything?language=en&q=ronaldo&from=2021-08-11&sortBy=publishedAt&apiKey=fd35c208bb994c409f81d5b0fab128d6`,{
+        const newAPI = await axios.get(`https://newsapi.org/v2/everything?language=en&q=xiaomi&from=2021-09-11&sortBy=publishedAt&apiKey=`,{
             language: 'en',
             country: 'uk'
         })
-        console.log(newAPI.data);
+        //console.log(newAPI.data);
         res.render('news', { articles: newAPI.data.articles})
     } catch (error) {
         if(error.response) {
+            res.render('news', { articles: null})
             console.log(error.response.data)
             console.log(error.response.status)
             console.log(error.response.headers)
         } else if(error.request){
+            res.render('news', { articles: null})
             console.log(error.request);
         } else {
+            res.render('news', { articles: null})
             console.error('Error', error.message)
         }
     }
 })
+
+
+newsRouter.post('', async (req, res) => {
+    const search = req.body.search
+
+    try {
+        const newAPI = await axios.get(`https://newsapi.org/v2/everything?language=en&q=${search}&from=2021-09-11&sortBy=publishedAt&apiKey=`,{
+            language: 'en',
+            country: 'uk'
+        })
+        //console.log(newAPI.data);
+        res.render('news', { articles: newAPI.data.articles})
+    } catch (error) {
+        if(error.response) {
+            res.render('news', { articles: null})
+            console.log(error.response.data)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        } else if(error.request){
+            res.render('news', { articles: null})
+            console.log(error.request);
+        } else {
+            res.render('news', { articles: null})
+            console.error('Error', error.message)
+        }
+    }
+})
+
 
 module.exports = newsRouter;

@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.scss">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <title>Nodejs News Web App</title>
 </head>
 <body>
     <header class="header">
         <div class="header__logo">Nodejs News Web App</div>
-       
+        <%- include('./partials/search.ejs') %>
     </header>
 
     <div class="wrapper">
         <div class="news">
             <% if(articles != null) { %>
             <% articles.map(function(article, index) { %>
-                <a href="/article/<%- article.id %>" class="news__card">
-                    <img src="<%- article.thumbnail_url %>" alt="<%- article.title.rendered %>">
+                <a href="<%- article.url %>" class="news__card">
+                    <img src="<%- article.urlToImage %>" alt="<%- article.title %>">
                     <h2><%- article.title %></h2>
                     <p><%- article.description %></p>
                 </a>
